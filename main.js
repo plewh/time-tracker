@@ -1,10 +1,16 @@
-const { app, Menu, BrowserWindow, Tray, ipcMain, Dock } = require('electron')
+const { 
+    app, 
+    Menu, 
+    BrowserWindow, 
+    Tray, 
+    ipcMain, 
+    Dock, 
+    process 
+} = require('electron');
 
 ipcMain.on('dunno', (event, arg) => {
     tray.showTrayPopUp();
 })
-
-
 
 let win;
 let tray;
@@ -33,8 +39,9 @@ function createWindow (tBounds) {
 app.whenReady().then(() => {
 
     //app.dock.hide();
+    console.log(process.platform);
 
-    tray = new Tray('noerror.ico')
+    tray = new Tray('ass/clock-icon-64.png');
     const contextMenu = Menu.buildFromTemplate([
         { label: 'Quit',  click() {app.quit();}}
     ])

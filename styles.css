@@ -1,0 +1,9 @@
+body {
+    background-color: #ECEFF4;
+}
+
+#root-header {
+    margin: 2px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}

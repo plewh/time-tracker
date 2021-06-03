@@ -1,16 +1,5 @@
-const { 
-    app, 
-    Menu, 
-    BrowserWindow, 
-    Tray, 
-    ipcMain, 
-    Dock, 
-    process 
-} = require('electron');
-
-ipcMain.on('dunno', (event, arg) => {
-    tray.showTrayPopUp();
-})
+const { app,Menu,BrowserWindow,Tray,ipcMain,Dock} = require('electron');
+const process = require('process');
 
 let win;
 let tray;
@@ -29,28 +18,39 @@ function createWindow (tBounds) {
         resizable: false,
         frame: false,
         show: false,
+        alwaysOnTop: true
     })
-
-    //console.log(`${tBounds.x}:${tBounds.y} | ${win.getBounds().x}:${win.getBounds().y}`);
+    
+    win.on('blur', (e) => {
+        tray.toggleWindowVis();
+    });
     win.setPosition(tBounds.x - wh/2, tBounds.y - ww);
-    win.loadFile('index.html')
+    win.loadFile('index.html');
+
+}
+
+function getIconForArch() {
+
+    switch(process.platform) {
+        case 'win32':
+            return 'ass/clock-multi.ico';
+        default:
+            return 'ass/clock-10-256.png';
+    }
+
 }
 
 app.whenReady().then(() => {
 
     //app.dock.hide();
-    console.log(process.platform);
 
-    tray = new Tray('ass/clock-icon-64.png');
+    tray = new Tray(getIconForArch());
     const contextMenu = Menu.buildFromTemplate([
         { label: 'Quit',  click() {app.quit();}}
     ])
     tray.setToolTip('Left click to open, right to quit.')
 
     tray.toggleWindowVis = function() {
-
-        //tray.popUpContextMenu(contextMenu, {x:rect.x + 10, y:rect.y + 10});
-        //createWindow(tray.getBounds());
 
         if (win.isVisible()) {
             win.hide();

@@ -1,9 +1,37 @@
 body {
     background-color: #ECEFF4;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 #root-header {
-    margin: 2px;
+    margin: 10px;
     text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
+    background-color: #D8DEE9;
+}
+
+#root-upper-buttons {
+    display: flex;
+    justify-content: center;
+    align-content: stretch;
+}
+
+#root-upper-buttons-mute {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+#root-upper-buttons-log {
+    flex-grow: 1;
+}
+
+.freq-radio {
+    display: flex;
+    flex-direction: column;
+}
+
+#root-time-radio {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 5px 100px 0px 85px;
 }

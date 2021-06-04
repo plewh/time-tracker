@@ -1,15 +1,21 @@
 const { app,Menu,BrowserWindow,Tray,ipcMain,Dock} = require('electron');
 const process = require('process');
 
+try {
+    require('electron-reloader')(module);
+} catch (_) {
+
+}
+
 let win;
 let tray;
 let wh = 400;
-let ww = 300;
+let ww = 400;
 
 function createWindow (tBounds) {
     win = new BrowserWindow({
-        width: wh,
-        height: ww,
+        width: ww,
+        height: wh,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false
@@ -22,9 +28,10 @@ function createWindow (tBounds) {
     })
     
     win.on('blur', (e) => {
-        tray.toggleWindowVis();
+        //tray.toggleWindowVis();
     });
-    win.setPosition(tBounds.x - wh/2, tBounds.y - ww);
+
+    win.setPosition(tBounds.x - ww/2, tBounds.y - wh);
     win.loadFile('index.html');
 
 }

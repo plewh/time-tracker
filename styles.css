@@ -3,6 +3,12 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+#root {
+    display: flex;
+    flex-direction: column;
+    height: 95vh;
+}
+
 #root-header {
     margin: 10px;
     text-align: center;
@@ -11,17 +17,20 @@ body {
 
 #root-upper-buttons {
     display: flex;
-    justify-content: center;
-    align-content: stretch;
+    justify-content: space-around;
 }
 
-#root-upper-buttons-mute {
-    flex-grow: 1;
-    margin-right: 10px;
+#root-time-radio {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 10px 100px 10px 85px;
 }
 
-#root-upper-buttons-log {
-    flex-grow: 1;
+#root-update {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .freq-radio {
@@ -29,9 +38,43 @@ body {
     flex-direction: column;
 }
 
-#root-time-radio {
+#root-update-previous-entry {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin: 5px 100px 0px 85px;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+#root-update-current-entry {
+    margin-top: auto;
+}
+
+#root-update-previous-entry-header {
+    text-align: center;
+}
+
+#root-update-previous-entry-textarea {
+    background-color: white;
+    border: 1px solid black;
+    font-family: monospace;
+    height: 46vh;
+    overflow-y: scroll;
+}
+
+#root-update-current-entry-text-box {
+    resize: none;
+    width: 98.5%;
+    margin-bottom: 10px;
+}
+
+#root-update-current-entry-buttons {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#root-upper-buttons-mute {
+    flex-grow: 2;
+}
+
+#root-upper-buttons-log {
+    flex-grow: 1;
 }

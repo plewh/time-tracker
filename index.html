@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
+
     <head>
         <meta charset="utf-8">
         <title></title>
         <link rel="stylesheet" href="styles.css">
     </head>
+
     <body>
         <script src="renderer.js" async defer></script>
         
@@ -18,7 +20,7 @@
             </div>
             <div id="root-time-radio">
                 <div id="root-time-radio-15min" class="freq-radio">
-                    <input type="radio" id="root-time-radio-15min-input" name="freq" value="15m"><label for="15m">15m</label>
+                    <input type="radio" id="root-time-radio-15min-input" name="freq" value="15m" checked="true"><label for="15m">15m</label>
                 </div>
                 <div id="root-time-radio-30min" class="freq-radio">
                     <input type="radio" id="root-time-radio-30min-input" name="freq" value="30m"><label for="30m">30m</label>
@@ -31,18 +33,27 @@
                 </div>
             </div>
             <div id="root-update">
-                root-update
-                <div id="root-update-header">
-                    root-update-header
-                </div>
                 <div id="root-update-previous-entry">
-                    root-update-previous-entry
+                    <div id="root-update-previous-entry-header">
+                        Previous updates:
+                    </div>
+                    <div id="root-update-previous-entry-textarea">
+                        <div class="root-update-previous-entry-item">12:00 - Did a thing</div>
+                        <div class="root-update-previous-entry-item">12:15 - Did another thing</div>
+                    </div>
                 </div>
                 <div id="root-update-current-entry">
-                    root-update-current-entry
+                    <div id="root-update-current-entry-textarea">
+                        <!--textarea id="root-update-current-entry-textarea-box" name="current-entry" rows="2" cols="45"></textarea-->
+                        <input id="root-update-current-entry-text-box" type="text">
+                    </div>
+                    <div id="root-update-current-entry-buttons">
+                        <button id="root-update-current-entry-buttons-update" onclick="updateTextBox()">Update</button>
+                        <button id="root-update-current-entry-buttons-copy">Copy Previous</button>
+                    </div>
                 </div>
             </div>            
         </div>
-
     </body>
+
 </html>

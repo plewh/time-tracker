@@ -1,11 +1,25 @@
 const { app,Menu,BrowserWindow,Tray,ipcMain,Dock} = require('electron');
 const process = require('process');
+const fs = require('fs');
 
 try {
     require('electron-reloader')(module);
-} catch (_) {
+} catch (_) {}
 
-}
+ipcMain.on('sendUpdateObj', (event, arg) => {
+    
+    // update logfile
+    /*
+    fs.readFile('log.txt', 'utf8', (err, data) => {
+        console.log(data);
+    });
+    event.reply('dunno-reply', 'wubalubadubdub');
+    */
+
+    let logStream = fs.createWriteStream('log.txt', {flags: 'a'});
+    logStream.end(arg.text + '\r\n');
+
+})
 
 let win;
 let tray;

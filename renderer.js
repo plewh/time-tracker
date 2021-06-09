@@ -1,15 +1,22 @@
-/*
 const {ipcRenderer} = require('electron');
 
-function dunno() {
-    ipcRenderer.send('dunno', {"rarr":'rarrr'});
-}
-*/
+ipcRenderer.on('dunno-reply', (event, args) => {
+    console.log(args);
+})
 
-function updateTextBox() {
+function processUpdateText() {
     
     // get user supplied value
     let inVal = document.getElementById("root-update-current-entry-text-box")
+
+    // create update object
+    let uItem = {
+        "datetime":'rarr',
+        "text":inVal.value
+    };
+
+    // update log
+    ipcRenderer.send('sendUpdateObj', uItem);
 
     // create new dom elements with user value
     let node = document.createElement("div");
@@ -37,3 +44,9 @@ setInterval(() => {
     */
 
 }, 200);
+
+document.getElementById("root-update-current-entry-text-box").addEventListener("keydown", (e) => {
+    if (e.keyCode === 13) {
+        document.getElementById("root-update-current-entry-buttons-update").click();
+    }
+})

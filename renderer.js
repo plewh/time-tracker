@@ -4,14 +4,14 @@ ipcRenderer.on('dunno-reply', (event, args) => {
     console.log(args);
 })
 
-function processUpdateText() {
+function updateText() {
     
     // get user supplied value
     let inVal = document.getElementById("root-update-current-entry-text-box")
 
     // create update object
     let uItem = {
-        "datetime":'rarr',
+        "datetime":Date.now(),
         "text":inVal.value
     };
 
@@ -21,7 +21,7 @@ function processUpdateText() {
     // create new dom elements with user value
     let node = document.createElement("div");
     node.setAttribute('class', "root-update-previous-entry-item");
-    node.appendChild(document.createTextNode(inVal.value));
+    node.appendChild(document.createTextNode(`${uItem.datetime} - ${uItem.text}`));
 
     // add new node to dom
     document.getElementById("root-update-previous-entry-textarea").appendChild(node);
@@ -30,6 +30,18 @@ function processUpdateText() {
     inVal.value = '';
     
 }
+
+function readLog() {
+
+    ipcRenderer.send('getUpdateObj');
+
+}
+
+ipcRenderer.on('getUpdateObjReply', (event, args) => {
+  
+    console.log("cool updates bro");
+    
+})
 
 setInterval(() => {
 
@@ -50,3 +62,7 @@ document.getElementById("root-update-current-entry-text-box").addEventListener("
         document.getElementById("root-update-current-entry-buttons-update").click();
     }
 })
+
+window.onload = (event, args) => {
+    readLog();
+}

@@ -8,16 +8,29 @@ try {
 
 ipcMain.on('sendUpdateObj', (event, arg) => {
     
-    // update logfile
-    /*
-    fs.readFile('log.txt', 'utf8', (err, data) => {
-        console.log(data);
-    });
-    event.reply('dunno-reply', 'wubalubadubdub');
-    */
-
     let logStream = fs.createWriteStream('log.txt', {flags: 'a'});
-    logStream.end(arg.text + '\r\n');
+    logStream.end(`${arg.datetime},${arg.text.replace(',', '')}\n`);
+
+})
+
+ipcMain.on('getUpdateObj', (event, arg) => {
+
+    // gather list of objects from file
+    let objList = [];
+    objList.push('rarrrrr');
+
+    var lineReader = require('readline').createInterface({
+        input: require('fs').createReadStream('log.txt')
+    });
+      
+    lineReader.on('line', function (line) {
+        
+        let x = line.split(','); 
+
+    });
+    
+    console.log(objList);
+    event.reply('getUpdateObjReply', 'cunt');
 
 })
 

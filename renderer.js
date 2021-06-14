@@ -4,14 +4,26 @@ ipcRenderer.on('dunno-reply', (event, args) => {
     console.log(args);
 })
 
+function addUpdateObjToDOM(uItem) {
+
+    let node = document.createElement("div");
+    node.setAttribute('class', "root-update-previous-entry-item");
+    node.appendChild(document.createTextNode(`${uItem.datetime} - ${uItem.text}`));
+
+    // add new node to dom
+    document.getElementById("root-update-previous-entry-textarea").appendChild(node);
+
+}
+
 function updateText() {
     
     // get user supplied value
     let inVal = document.getElementById("root-update-current-entry-text-box")
 
     // create update object
+    let x = new Date();
     let uItem = {
-        "datetime":Date.now(),
+        "datetime": `${x.getFullYear()}${('0'+(x.getMonth() +1)).slice(-2)}${x.getDate()}${('0' + x.getHours()).split(-2)}${x.getMinutes()}`,
         "text":inVal.value
     };
 
@@ -19,12 +31,7 @@ function updateText() {
     ipcRenderer.send('sendUpdateObj', uItem);
 
     // create new dom elements with user value
-    let node = document.createElement("div");
-    node.setAttribute('class', "root-update-previous-entry-item");
-    node.appendChild(document.createTextNode(`${uItem.datetime} - ${uItem.text}`));
-
-    // add new node to dom
-    document.getElementById("root-update-previous-entry-textarea").appendChild(node);
+    addUpdateObjToDOM(uItem);
 
     // clear textarea
     inVal.value = '';
@@ -37,9 +44,12 @@ function readLog() {
 
 }
 
-ipcRenderer.on('getUpdateObjReply', (event, args) => {
+ipcRenderer.on('getUpdateObjReply', (event, arg) => {
   
-    console.log("cool updates bro");
+    addUpdateObjToDOM({
+        "datetime":arg[0],
+        "text":arg[1]
+    })
     
 })
 

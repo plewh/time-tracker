@@ -15,22 +15,14 @@ ipcMain.on('sendUpdateObj', (event, arg) => {
 
 ipcMain.on('getUpdateObj', (event, arg) => {
 
-    // gather list of objects from file
-    let objList = [];
-    objList.push('rarrrrr');
-
     var lineReader = require('readline').createInterface({
         input: require('fs').createReadStream('log.txt')
     });
       
     lineReader.on('line', function (line) {
-        
-        let x = line.split(','); 
-
+        event.reply('getUpdateObjReply', line.split(','));
     });
-    
-    console.log(objList);
-    event.reply('getUpdateObjReply', 'cunt');
+
 
 })
 
